@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import dotenv  from "dotenv"
 
 dotenv.config()
-let refreshTokens= []
+
 export const createUser= async (req,res)=>{
     try {
 
