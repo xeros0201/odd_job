@@ -126,7 +126,7 @@ export const findUser= async (req,res)=>{
           </head>
           <body>
           <h1>Bấm vào link bên dưới để đổi lại mật khẩu</h1>
-          <a href="http://localhost:3000/re-password?token=${thisT}&id=${user._id}">Click here!</a>
+          <a href="http://phobendoi.art/re-password?token=${thisT}&id=${user._id}">Click here!</a>
           </body>
           </html>`,
   

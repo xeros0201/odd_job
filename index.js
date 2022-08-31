@@ -21,7 +21,12 @@ const PORT =  8001
 
 dotenv.config();
 //CONECT DATABASE
-mongoose.connect(process.env.MG_URL,
+const server = '127.0.0.1:27017'; // REPLACE WITH YOUR DB SERVER
+const database = 'phobendoi'; // REPLACE WITH YOUR DB NAME
+app.listen(PORT,()=>{
+    console.log("server is running")
+})
+mongoose.connect(`mongodb://${server}/${database}`,
 { useNewUrlParser:true, useUnifiedTopology:true,
 }).then(()=>{
     console.log("Connected")
@@ -29,13 +34,11 @@ mongoose.connect(process.env.MG_URL,
 }).catch(err =>{
     console.log('err',err)
 })
-app.get('/',(req,res)=>{
-    res.send('<h1>success</>')
-})
+
 app.disable('etag');
 
-app.use(bodyParser.json({limit:"100mb"}));
-app.use(bodyParser.urlencoded({extended:true,limit:"100mb"    }));
+app.use(bodyParser.json({limit:"10mb"}));
+app.use(bodyParser.urlencoded({extended:true,limit:"10mb"    }));
 app.use(cors());
 app.use(morgan("common"));
 app.use(cookieParser())
@@ -55,6 +58,4 @@ app.use("/api/event",events)
 app.use("/api/contact",contact)
 app.use("/api/city",city)
 app.use("/api/bill",bill)
-app.listen(PORT,()=>{
-    console.log("server is running")
-})
+
