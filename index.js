@@ -1,32 +1,21 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import products from './routes/product.js'
 import mongoose from 'mongoose'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import dotenv  from "dotenv"
 
-import auth from './routes/auth.js'
-import user from './routes/user.js'
-import gen from './routes/genres.js'
-import discount from './routes/discount.js'
-import project from './routes/project.js'
-import events from './routes/event.js'
-import contact from './routes/contact.js'
-import city from './routes/city.js'
-import bill from './routes/bill.js'
+
 const app= express();
-const PORT =  8001
+const PORT =  8000
 
 dotenv.config();
 //CONECT DATABASE
-const server = '127.0.0.1:27017'; // REPLACE WITH YOUR DB SERVER
-const database = 'phobendoi'; // REPLACE WITH YOUR DB NAME
 app.listen(PORT,()=>{
     console.log("server is running")
 })
-mongoose.connect(`mongodb://${server}/${database}`,
+mongoose.connect("mongodb+srv://odd_job:123@cluster0.krrhbzs.mongodb.net/?retryWrites=true&w=majority",
 { useNewUrlParser:true, useUnifiedTopology:true,
 }).then(()=>{
     console.log("Connected")
@@ -45,17 +34,5 @@ app.use(cookieParser())
 app.use(express.json())
 
 
-//ROUTES
-// app.use("/v1/author",authorRoute)
-app.use("/api/products",products)
-app.use("/api/auth",auth)
-app.use("/api/user",user)
-app.use("/api/genres",gen)
-app.use("/api/discount",discount)
-app.use("/api/project",project)
-app.use("/api/event",events)
 
-app.use("/api/contact",contact)
-app.use("/api/city",city)
-app.use("/api/bill",bill)
 
