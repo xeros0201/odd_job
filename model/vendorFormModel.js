@@ -9,56 +9,49 @@ const schema = new mongoose.Schema({
   },
   status: {
     type:String,
-    enum: ['Pending','Approved','Rejected']
+    enum: ['Pending','Approved','Rejected'],
+    default:"Pending"
   },
   vendor_address: {
     type:String,
     required:true
   },
   business_desc: {
-    type:String,
+    type:mongoose.Schema.Types.Mixed,
   },
-  id_card_number: {
-    NumberID: {
-      type: Number,
-      required: true
-    },
-    TaxNumber: {
-      type: Number,
-      required: true
-    },
-    front_image: {
-      type: String,
-      required: true
-    },
-    back_image: {
-      type: String,
-      required: true
-    },
+  NumberID: {
+    type: Number,
+      required:true
   },
-
-
-  email:{
-    type:String,
-    minlength:6,
-    maxlength:30
+  
+  TaxNumber: {
+    type: Number,
+      required:true
   },
-  phone:{
-    type:Number,
-    min:8,
-    max:20
-  },
-  role:{
-    type:String,
-    enum:['admin','vendor','customer']
-  },
-  status:{
-    type:String,
-    enum:['Activated','Suspended','Deleted','Deactivated']
-  },
-  transaction_history:{
+  front_image: {
     type:mongoose.Schema.Types.ObjectId,
-    ref:"Transaction"
-  }
+    ref:"Image",
+    required:true
+  },
+  back_image: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Image",
+    required:true
+  },
+
+  worker_list:[{
+    
+    worker_status:{
+        type:String,
+        enum:["available","busy","working"],
+        default:"available"
+    },
+    worker:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Account",
+  }}],
+
+  
+
 },{timestamps:true})
 export const VendorFormModel = mongoose.model("VendorForm",schema)

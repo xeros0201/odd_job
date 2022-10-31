@@ -20,7 +20,7 @@ from: {
 to: {
   type:mongoose.Schema.Types.ObjectId,
   ref:"Account",
-  required:true
+  default:"non_customer_action"
 }
 
 },{timestamps:true})
